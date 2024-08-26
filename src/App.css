@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap');
+
 :root[data-theme='light'] {
   --ion-color-primary: #333;
 }
@@ -20,4 +22,8 @@
 a {
   text-decoration: none;
   color: var(--ion-color-primary);
+}
+
+.hide-tab-bar {
+  display: none;
 }
