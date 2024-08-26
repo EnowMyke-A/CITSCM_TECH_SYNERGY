@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap');
 
 :root {
-  --ion-color-primary: #333;
+  --ion-color-primary: #000 !important;
   --ion-color-mute: #dcdcdc;
 }
 
@@ -74,5 +74,6 @@ ion-tab-button ion-label {
 }
 
 ion-tab-button.tab-selected ion-label {
-  color: var(--ion-color-primary);
+  color: var(--ion-color-primary) !important;
+  font-weight: 600;
 }
