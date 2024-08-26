@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
 
-const ProductDetail: React.FC = () => {
+const Favorites: React.FC = () => {
 
     return (
         <IonPage>
@@ -11,10 +11,10 @@ const ProductDetail: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
-            Product Details
+                Favorites
             </IonContent>
         </IonPage>
     );
 };
 
-export default ProductDetail;
+export default Favorites;
