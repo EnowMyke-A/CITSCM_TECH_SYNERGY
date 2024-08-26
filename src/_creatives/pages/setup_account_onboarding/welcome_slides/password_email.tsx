@@ -14,7 +14,7 @@ const PasswordSignUpScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
 
   function handleClickPrev() {
     //Do some validation here
-    prevClick();
+    prevClick();}
 
 async function googleAuth() {
     await signInWithGoogle();
