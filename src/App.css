@@ -7,6 +7,7 @@
 
 :root {
   --ion-color-primary: #000 !important;
+  --background: #fff;
   --ion-color-mute: #dcdcdc;
 }
 
@@ -79,4 +80,8 @@ ion-tab-button ion-label {
 ion-tab-button.tab-selected ion-label {
   color: var(--ion-color-primary) !important;
   font-weight: 600;
+}
+
+.toolbar-background {
+  background-color: var(--background) importn !important;
 }
