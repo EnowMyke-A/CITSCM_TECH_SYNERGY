@@ -18,7 +18,7 @@
 .home-section-1 p,
 .home-section-1 h3,
 .home-section-1 span {
-  font-family: 'Roboto', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 .home-section-1 {
@@ -28,31 +28,29 @@
 .products-list-container {
   display: flex;
   overflow-x: scroll;
-  gap: 10px;
+  gap: 16px;
   margin-top: 16px;
 }
 
 .products-list-container .product {
   display: flex;
-  width: 265px;
-  min-width: 250px;
   flex-direction: column;
   align-items: flex-start;
   gap: 6px;
 }
 
 .products-list-container .product .img {
+  overflow: hidden;
   width: 100%;
-  height: 200px;
+  height: 240px;
   border-radius: 4px;
   background-color: var(--ion-color-mute);
 }
 
 .products-list-container .product img {
   width: 100%;
-  height: auto;
   border-radius: 4px;
-  min-height: 100px;
+  object-fit: cover;
 }
 
 .products-list-container .product .content {
@@ -83,12 +81,21 @@
   height: fit-content;
   display: flex;
   align-items: center;
-  padding: 8px;
   gap: 4px;
-  border-radius: 26px;
+  padding: 8px;
+  border-radius: 24px;
   background-color: transparent;
-  border: 1px solid var(--ion-color-mute);
   margin-top: 16px;
+  width: 110px;
+}
+
+.see-story span {
+  font-weight: 600;
+}
+
+.see-story ion-icon {
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .sticky-top {
@@ -107,8 +114,8 @@
 
 .sticky-top button {
   font-size: 1rem;
-  font-weight: 500;
-  padding: 8px 16px;
+  font-weight: 600;
+  padding: 14px 16px;
   border-radius: 40px;
 }
 
@@ -133,26 +140,24 @@
 .arts-works-container .img {
   width: 100%;
   border-radius: 4px;
-  background-color: var(--ion-color-mute);
 }
 
 .arts-works-container img {
   width: 100%;
-  height: auto;
-  min-height: 250px;
-  background-color: var(--ion-color-mute);
   border-radius: 4px;
 }
 
 .arts-works h3,
 .arts-works p,
 .arts-works span {
-  font-family: 'Roboto', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   font-weight: 400;
 }
 
 .arts-works h3 {
-  font-size: 18px;
+  font-size: 16px;
+  margin-top: 2px;
+  margin-bottom: 0;
   font-weight: 500;
 }
 
