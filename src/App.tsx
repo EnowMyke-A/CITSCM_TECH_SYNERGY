@@ -10,10 +10,25 @@ import {
   IonTabButton,
   IonTabs,
   setupIonicReact,
-} from "@ionic/react";
-import { IonReactRouter } from "@ionic/react-router";
-import { chatboxOutline, homeOutline, personOutline } from "ionicons/icons";
-
+} from '@ionic/react';
+import { IonReactRouter } from '@ionic/react-router';
+import {
+  homeOutline,
+  searchOutline,
+  chatboxOutline,
+  personCircleOutline,
+  home,
+  search,
+  chatbox,
+  personCircle,
+  chatboxEllipsesSharp,
+  chatboxEllipses,
+  searchCircleSharp,
+  chatboxEllipsesOutline,
+  homeSharp,
+  personCircleSharp,
+  searchSharp,
+} from 'ionicons/icons';
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -39,7 +54,6 @@ import "@ionic/react/css/display.css";
 
 /* import '@ionic/react/css/palettes/dark.always.css'; */
 /* import '@ionic/react/css/palettes/dark.class.css'; */
-//import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 //import "./theme/variables.css";
@@ -73,6 +87,7 @@ const App: React.FC = () => {
   const [hideTabBar, setHideTabBar] = useState(false);
   const [showCreativeTabBar, setShowCreativeTabBar] = useState(false);
 
+
   return (
     <IonApp>
       <IonReactRouter>
@@ -105,32 +120,37 @@ const App: React.FC = () => {
             <Route path="/creative/products/add" component={ChatBot} />
             <Route path="/creative/tabs/profile" component={Profile} />
             <Route path="/creative/profile/edit" component={EditProfile} />
-            <Route path="/creative/search" component={Search} />
+            <Route path="/creative/tabs/search" component={Search} />
 
             {/* Arts Lover pages */}
           </IonRouterOutlet>
 
+          
+
           {/* Creative Tab bar */}
           {showCreativeTabBar && (
-            <IonTabBar
-              slot="bottom"
-              className={hideTabBar ? "hide-tab-bar" : ""}
-            >
-              <IonTabButton tab="Home" href="/creative/tabs/home">
-                <IonIcon icon={homeOutline} />
-                <IonLabel>Home</IonLabel>
-              </IonTabButton>
 
-              <IonTabButton tab="Messages" href="/creative/tabs/messages">
-                <IonIcon icon={chatboxOutline} />
-                <IonLabel>Messages</IonLabel>
-              </IonTabButton>
+            <IonTabBar slot="bottom" className={hideTabBar ? "hide-tab-bar" : "ion-tab-bar"}>
+        <IonTabButton tab="Home" href="/creative/tabs/home">
+          <IonIcon icon={location.pathname == "creative/tabs/home" ? homeSharp : homeOutline} />
+          <IonLabel>Home</IonLabel>
+        </IonTabButton>
 
-              <IonTabButton tab="Profile" href="/creative/tabs/profile">
-                <IonIcon icon={personOutline} />
-                <IonLabel>Profile</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
+        <IonTabButton tab="search" href="/creative/tabs/search">
+          <IonIcon icon={location.pathname == "/creative/tabs/search" ? searchOutline : searchSharp} />
+          <IonLabel>Search</IonLabel>
+        </IonTabButton>
+
+        <IonTabButton tab="Messages" href="/creative/tabs/messages">
+          <IonIcon icon={location.pathname == "/creative/tabs/messages" ? chatboxEllipsesSharp : chatboxEllipsesOutline} />
+          <IonLabel>Messages</IonLabel>
+        </IonTabButton>
+
+        <IonTabButton tab="Profile" href="/creative/tabs/profile">
+          <IonIcon icon={location.pathname == "/creative/tabs/profile" ? personCircleSharp : personCircleOutline} />
+          <IonLabel>Profile</IonLabel>
+        </IonTabButton>
+      </IonTabBar>
           )}
 
           {/* Art Lover Tab bar */}
