@@ -1,0 +1,248 @@
+.post-img {
+  width: 100%;
+  min-height: 300px;
+  position: relative;
+  background-color: #f9f9f9;
+}
+
+.post-img img {
+  width: 100%;
+  height: 150px;
+  min-height: 300px;
+}
+
+.post-img .img-absolute-btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  background-color: #f7f7f7;
+  border-radius: 100%;
+  padding: 8px 11px;
+}
+
+.post-img .img-absolute-btn button {
+  background-color: transparent;
+}
+
+.post-content .title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.post-content .title label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.post-content .title input {
+  display: flex;
+  height: 48px;
+  padding: 15px 164px 18px 27px;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 16px;
+  background: var(--GREY, #dcdcdc);
+}
+
+.upload-art-container h3 {
+  font-family: 'Fira Sans';
+  margin-top: 2.6rem;
+}
+
+.tab-btn-container {
+  display: flex;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 2rem;
+  background-color: var(--ion-color-mute);
+  margin-top: 16px;
+}
+
+.tab-btn-container button {
+  display: flex;
+  padding: 14px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 32px;
+  border-radius: 150px;
+  color: #8e8e8e;
+  background-color: transparent;
+}
+
+.tab-btn-container button.active {
+  background: #6f6f6f;
+  color: #f9f9f9;
+}
+
+.text-tab .input-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  margin-top: 24px;
+  padding: 24px;
+  gap: 10px;
+  height: 250px;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.text-tab textarea {
+  display: flex;
+  outline: none;
+  justify-content: center;
+  align-items: center;
+  color: #6f6f6f;
+  background-color: transparent;
+  border: none;
+  height: 250px;
+  width: 100%;
+}
+
+.btn-add-edit-text {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 1rem;
+  gap: 1.2rem;
+  align-self: stretch;
+}
+
+.btn-enhance-text {
+  display: flex;
+  padding: 14px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 24px;
+  background: #040404;
+  color: #f9f9f9;
+}
+
+.btn-add-edit-text ion-icon {
+  color: white;
+}
+
+.btn-save-text ion-icon {
+  color: #333;
+}
+
+.btn-save-text {
+  display: flex;
+  padding: 14px;
+  justify-content: center;
+  color: #333;
+  gap: 4px;
+  border-radius: 24px;
+  background: #f9f9f9;
+}
+
+.video-tab .btn-save-text {
+  width: 100%;
+  margin-top: 1.4rem;
+}
+
+.video-tab .video-preview {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  height: auto;
+  min-height: 250px;
+  width: 100%;
+  max-width: 450px;
+}
+
+.product-specifications {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-block: 1rem;
+}
+
+.product-specifications .column-2-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+.product-specifications .input,
+.product-specifications .select {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.product-specifications .input input {
+  padding: 12px;
+  border-radius: 16px;
+  background: #dcdcdc;
+}
+
+.product-specifications .select select {
+  outline: none;
+  border: none;
+  padding: 12px;
+  border-radius: 16px;
+  background: #dcdcdc;
+}
+
+/* progress bar */
+.progress-bar-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0px 3rem;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 30px;
+  left: 1.8rem;
+  width: calc(100% - 3.8rem);
+  height: 5px;
+  background-color: #3b3b3b27;
+  border-radius: 4px;
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  margin-bottom: 10px;
+  width: 25%;
+  max-width: 99px;
+  height: 95px;
+  z-index: 2;
+}
+
+.progress-step.active .step-number {
+  background-color: var(--ion-color-primary);
+  color: #fff;
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--ion-color-primary);
+  background-color: var(--ion-background-color);
+  font-size: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+.step-title {
+  color: var(--ion-color-contrast);
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.progress-step.active .step-title {
+  color: var(--ion-color-primary);
+}

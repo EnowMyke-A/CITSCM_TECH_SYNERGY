@@ -109,7 +109,7 @@ const App: React.FC = () => {
             <Route path="/creative/payment" component={Payment} />
             <Route path="/creative/selectpayment" component={SelectPayment} />
             <Route path="/creative/products/:id" component={ProductDetail} />
-            <Route path="/creative/products/add" component={ChatBot} />
+            <Route path="/creative/products/add" component={UploadProduct} />
             <Route path="/creative/tabs/profile" component={Profile} />
             <Route path="/creative/profile/edit" component={EditProfile} />
             <Route path="/creative/tabs/search" component={Search} />
