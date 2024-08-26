@@ -1,4 +1,5 @@
 import "./welcome_slide.css";
+import {signInWithGoogle} from '../../../../services/Auth'
 
 interface prop {
   nextClick: Function;
@@ -14,6 +15,9 @@ const PasswordSignUpScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
   function handleClickPrev() {
     //Do some validation here
     prevClick();
+
+async function googleAuth() {
+    await signInWithGoogle();
   }
 
   return (
@@ -62,7 +66,7 @@ const PasswordSignUpScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
             <span>OR</span>
             <hr className="seperator_line" />
           </div>
-          <button className="google_authenication">
+          <button className="google_authenication" onClick={googleAuth}>
             <svg
               width="25"
               height="24"
