@@ -1,57 +1,43 @@
-import React, { PureComponent } from 'react'
+import React from 'react';
 
-export class ArtsWorks extends PureComponent {
-  render() {
+function ArtsWorks({ arts }:any) {
     return (
-      <div className='arts-works-container'>
-        <div className="left">
-        <div className="arts-works">
-        <div className="img">
-            <img src="" alt="" />
+        <div className='arts-works-container'>
+            {arts.map((art, index) => {
+                if (index % 2 === 0) {
+                    return (
+                        <div className="left" key={index}>
+                            <div className="arts-works">
+                                <div className="img">
+                                    <img src={art.product_link} alt={art.title} />
+                                </div>
+                                <div className="content">
+                                    <h3>{art.author_name}</h3>
+                                    <p className='ellipses'>{art.product_name}</p>
+                                    <span>US$ {art.product_price}</span>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                } else {
+                    return (
+                        <div className="right" key={index}>
+                            <div className="arts-works">
+                                <div className="img">
+                                    <img src={art.product_link} alt={art.title} />
+                                </div>
+                                <div className="content">
+                                    <h3>{art.author_name}</h3>
+                                    <p className='ellipses'>{art.product_name}</p>
+                                    <span>US$ {art.product_price}</span>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                }
+            })}
         </div>
-        <div className="content">
-        <h3>Namondo Wagmonde</h3>
-        <p className='ellipses'>Wolumban Artifact Indigenous solutoions</p>
-        <span>US$ 12, 000</span>
-        </div>
-        </div>
-        <div className="arts-works">
-        <div className="img">
-            <img src="" alt="" />
-        </div>
-        <div className="content">
-        <h3>Namondo Wagmonde</h3>
-        <p className='ellipses'>Wolumban Artifact Indigenous solutoions</p>
-        <span>US$ 12, 000</span>
-        </div>
-        </div>
-        </div>
-
-        <div className="right">
-        <div className="arts-works">
-        <div className="img">
-            <img src="" alt="" />
-        </div>
-        <div className='content'>
-        <h3>Namondo Wagmonde</h3>
-        <p className='ellipses'>Wolumban Artifact Indigenous solutoions</p>
-        <span>US$ 12, 000</span>
-        </div>
-        </div>
-        <div className="arts-works">
-        <div className="img">
-            <img src="" alt="" />
-        </div>
-        <div>
-        <h3>Namondo Wagmonde</h3>
-        <p className='ellipses'>Wolumban Artifact Indigenous solutoions</p>
-        <span>US$ 12, 000</span>
-        </div>
-        </div>
-        </div>
-      </div>
-    )
-  }
+    );
 }
 
-export default ArtsWorks
+export default ArtsWorks;
