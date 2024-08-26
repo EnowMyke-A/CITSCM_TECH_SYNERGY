@@ -1,0 +1,16 @@
+.main_setup_creative_account .swiper-pagination {
+  top: 5px;
+  bottom: unset;
+}
+
+.main_setup_creative_account .swiper-pagination .swiper-pagination-bullet {
+  width: calc(calc(100vw - 80px) / 4);
+  border-radius: 8px;
+  height: 3px;
+}
+
+.main_setup_creative_account
+  .swiper-pagination
+  .swiper-pagination-bullet-active {
+  background-color: #000;
+}
