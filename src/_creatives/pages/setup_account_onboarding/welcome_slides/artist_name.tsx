@@ -1,14 +1,23 @@
 import "./welcome_slide.css";
+import { useIonRouter } from "@ionic/react";
 
 interface prop {
   prevClick: Function;
 }
 
-const ArtistName: React.FC<prop> = ({prevClick}) => {
-
+const ArtistName: React.FC<prop> = ({ prevClick }) => {
   function handleClickPrev() {
     //Do some validation here
     prevClick();
+  }
+
+  const router = useIonRouter();
+
+  function handleAccountCreation() {  
+
+    //put all code for account creation here
+
+    router.push("/creative/tabs/home");
   }
 
   return (
@@ -42,7 +51,14 @@ const ArtistName: React.FC<prop> = ({prevClick}) => {
             placeholder="your name"
           />
         </div>
-        <button className="primary-black-button">Let's go</button>
+        <button
+          className="primary-black-button"
+          onClick={() => {
+            handleAccountCreation();
+          }}
+        >
+          Let's go
+        </button>
       </div>
     </div>
   );

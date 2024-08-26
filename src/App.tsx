@@ -10,8 +10,8 @@ import {
   IonTabButton,
   IonTabs,
   setupIonicReact,
-} from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
+} from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
 import {
   homeOutline,
   searchOutline,
@@ -28,7 +28,12 @@ import {
   homeSharp,
   personCircleSharp,
   searchSharp,
-} from 'ionicons/icons';
+} from "ionicons/icons";
+
+import homeIcon from "./assets/icons/home.svg";
+import messageIcon from "./assets/icons/message.svg";
+import searchIcon from "./assets/icons/search.svg";
+import profileIcon from "./assets/icons/home.svg";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -88,7 +93,6 @@ const App: React.FC = () => {
   const [hideTabBar, setHideTabBar] = useState(false);
   const [showCreativeTabBar, setShowCreativeTabBar] = useState(false);
 
-
   return (
     <IonApp>
       <IonReactRouter>
@@ -130,32 +134,28 @@ const App: React.FC = () => {
             {/* Arts Lover pages */}
           </IonRouterOutlet>
 
-          
-
           {/* Creative Tab bar */}
           {showCreativeTabBar && (
+            <IonTabBar
+              slot="bottom"
+              className={hideTabBar ? "hide-tab-bar" : "ion-tab-bar"}
+            >
+              <IonTabButton tab="Home" href="/creative/tabs/home">
+                <IonIcon src={homeIcon} />
+              </IonTabButton>
 
-            <IonTabBar slot="bottom" className={hideTabBar ? "hide-tab-bar" : "ion-tab-bar"}>
-        <IonTabButton tab="Home" href="/creative/tabs/home">
-          <IonIcon icon={location.pathname == "creative/tabs/home" ? homeSharp : homeOutline} />
-          <IonLabel>Home</IonLabel>
-        </IonTabButton>
+              <IonTabButton tab="search" href="/creative/tabs/search">
+                <IonIcon src={searchIcon} />
+              </IonTabButton>
 
-        <IonTabButton tab="search" href="/creative/tabs/search">
-          <IonIcon icon={location.pathname == "/creative/tabs/search" ? searchOutline : searchSharp} />
-          <IonLabel>Search</IonLabel>
-        </IonTabButton>
+              <IonTabButton tab="Messages" href="/creative/tabs/messages">
+                <IonIcon src={messageIcon} />
+              </IonTabButton>
 
-        <IonTabButton tab="Messages" href="/creative/tabs/messages">
-          <IonIcon icon={location.pathname == "/creative/tabs/messages" ? chatboxEllipsesSharp : chatboxEllipsesOutline} />
-          <IonLabel>Messages</IonLabel>
-        </IonTabButton>
-
-        <IonTabButton tab="Profile" href="/creative/tabs/profile">
-          <IonIcon icon={location.pathname == "/creative/tabs/profile" ? personCircleSharp : personCircleOutline} />
-          <IonLabel>Profile</IonLabel>
-        </IonTabButton>
-      </IonTabBar>
+              <IonTabButton tab="Profile" href="/creative/tabs/profile">
+                <IonIcon src={profileIcon} />
+              </IonTabButton>
+            </IonTabBar>
           )}
 
           {/* Art Lover Tab bar */}
