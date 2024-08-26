@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root[data-theme='light'] {
+  --ion-color-primary: #333;
+}
+
+* {
+  font-family: 'Ojuju', sans-serif !important;
+  box-sizing: border-box;
+  scrollbar-width: 0;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+*::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--ion-color-primary);
+}
