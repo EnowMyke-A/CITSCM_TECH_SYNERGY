@@ -3,13 +3,18 @@ import {signInWithGoogle} from '../../../../services/Auth'
 
 interface prop {
   nextClick: Function;
+  prevClick: Function;
 }
 
-const PasswordSignUpScreen: React.FC<prop> = ({ nextClick }) => {
+const PasswordSignUpScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
   function handleClickNext() {
     //Do some validation here
     nextClick();
   }
+
+  function handleClickPrev() {
+    //Do some validation here
+    prevClick();
 
 async function googleAuth() {
     await signInWithGoogle();
@@ -17,6 +22,21 @@ async function googleAuth() {
 
   return (
     <div className="main_signup_container">
+      <button onClick={handleClickPrev} className="float_back_button_auth">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="300"
+          height="300"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill="#000000"
+            fill-rule="evenodd"
+            d="M10.53 2.97a.75.75 0 0 1 0 1.06L6.56 8l3.97 3.97a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 0"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
       <div className="main_signup_content">
         <div className="logo_section"></div>
         <div className="signup_content_proper">
@@ -29,25 +49,21 @@ async function googleAuth() {
                 id="email_signup"
                 placeholder="email"
               />
-              <label htmlFor="password_signup">Password</label>
+              <label htmlFor="password_signup" style={{ marginTop: "15px" }}>
+                Password
+              </label>
               <input
                 type="password"
                 name="password_field"
                 id="password_signup"
                 placeholder="password"
               />
-              <button
-                onClick={() => {
-                  handleClickNext;
-                }}
-              >
-                Next
-              </button>
+              <button onClick={handleClickNext}>Next</button>
             </div>
           </div>
           <div className="third_party_section_seperator">
             <hr className="seperator_line" />
-            <span>or</span>
+            <span>OR</span>
             <hr className="seperator_line" />
           </div>
           <button className="google_authenication" onClick={googleAuth}>

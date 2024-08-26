@@ -103,7 +103,7 @@
   font-family: "Inter", sans-serif !important;
   font-size: 14px !important;
   border-radius: 150px;
-  height: 48px;
+  height: 50px;
   background: #000;
 }
 
@@ -556,7 +556,7 @@ hr.hr-line {
   font-family: "Inter", sans-serif !important;
   font-size: 14px;
   border-radius: 150px;
-  height: 48px;
+  height: 50px;
   border: 1.5px solid #dcdcdc;
   background-color: transparent;
   color: #000;
