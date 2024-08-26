@@ -1,5 +1,5 @@
 import { IonIcon } from '@ionic/react'
-import { play } from 'ionicons/icons'
+import { chevronForward, play } from 'ionicons/icons'
 import React from 'react'
 
 function ProductList({arts}:any) {
@@ -18,8 +18,8 @@ function ProductList({arts}:any) {
             <p>US$ { art.product_price}</p>
             </div>
             <button className="see-story">
-                <IonIcon icon={play} />
                 <span>See story</span>
+                <IonIcon icon={chevronForward} />
             </button>
         </div>
       </div>
