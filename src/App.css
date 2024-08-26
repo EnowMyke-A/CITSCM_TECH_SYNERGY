@@ -2,13 +2,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap');
 
-:root[data-theme='light'] {
+:root {
   --ion-color-primary: #333;
+  --ion-color-mute: #dcdcdc;
 }
 
 * {
   font-family: 'Ojuju', sans-serif !important;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   scrollbar-width: 0;
 }
 
@@ -19,6 +22,13 @@
   display: none;
 }
 
+:host {
+  --color-selected: var(
+    --ion-tab-bar-color-selected,
+    var(--ion-color-primary, #333)
+  );
+}
+
 a {
   text-decoration: none;
   color: var(--ion-color-primary);
@@ -26,4 +36,43 @@ a {
 
 .hide-tab-bar {
   display: none;
+}
+
+input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+ion-tab-bar {
+  height: 70px !important;
+}
+
+ion-tab-button ion-icon {
+  width: 24px;
+  height: 24px;
+}
+
+ion-tab-button {
+  position: relative;
+}
+
+ion-tab-button.tab-selected::before {
+  width: 68px;
+  opacity: 1;
+  transition: 0.3s;
+  color: var(--ion-color-primary);
+}
+
+ion-tab-button.tab-selected {
+  color: var(--ion-color-primary);
+}
+
+ion-tab-button ion-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+ion-tab-button.tab-selected ion-label {
+  color: var(--ion-color-primary);
 }
