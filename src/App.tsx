@@ -64,6 +64,7 @@ import Profile from "./_creatives/pages/profile/Profile";
 import BottomTabController from "./components/buttomTabController";
 import WelcomeScreen from "./intro_on_boarding";
 import RolePage from "./intro_on_boarding/role";
+import SetUpCreativeAccount from "./_creatives/pages/setup_account_onboarding";
 import { render } from "@testing-library/react";
 // art lover panel
 
@@ -92,6 +93,10 @@ const App: React.FC = () => {
               path="/creative/tabs/home"
               render={() => <Home />}
               exact={true}
+            />
+            <Route
+              path="/creative/signup"
+              render={() => <SetUpCreativeAccount />}
             />
             <Route path="/welcome" render={() => <WelcomeScreen />} />
             <Route path="/select/roles" render={() => <RolePage />} />

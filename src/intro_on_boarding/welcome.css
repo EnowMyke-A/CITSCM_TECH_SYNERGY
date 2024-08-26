@@ -101,7 +101,7 @@
   width: 100%;
   font-weight: 500;
   font-family: "Inter", sans-serif !important;
-  font: 14px !important;
+  font-size: 14px !important;
   border-radius: 150px;
   height: 48px;
   background: #000;
@@ -528,8 +528,13 @@ hr.hr-line {
 }
 
 .select_role_main > div > h1 {
-  font-weight: 600;
+  color: #000;
+  font-family: "Inter", sans-serif !important;
   font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 279px;
 }
 
 .select_role_main .logo_section {
@@ -552,7 +557,7 @@ hr.hr-line {
   font-size: 14px;
   border-radius: 150px;
   height: 48px;
-  border: 2px solid #000;
+  border: 1.5px solid #dcdcdc;
   background-color: transparent;
   color: #000;
   width: 100%;
