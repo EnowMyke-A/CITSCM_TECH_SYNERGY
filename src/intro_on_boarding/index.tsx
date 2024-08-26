@@ -3,16 +3,16 @@ import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination, Navigation } from "swiper/modules";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import SwiperCore from "swiper";
 
-SwiperCore.use([Navigation, Pagination]);
+import "swiper/css/autoplay";
 
-import "../Auth.css";
+SwiperCore.use([Autoplay, Navigation, Pagination]);
+
 import "./welcome.css";
 
 import { chevronForward } from "ionicons/icons";
-import logo from "../../../../assets/images/logo-white.svg";
 
 import GetStartedScreen from "./welcome_pages/GetStarted";
 import WelcomeScreen2 from "./welcome_pages/Welcome_screen_2";
@@ -27,29 +27,19 @@ const WelcomeScreen: React.FC = () => {
     }
   }
 
+
   return (
     <IonPage className="welcome-screens">
-      <IonHeader className="welcome-direction-control">
-        <div className="logo-section">
-          <img className="welcome-logo" src={logo} />
-          <span>ReliefRadar</span>
-        </div>
-        <IonButton
-          mode="ios"
-          className="welcome-control-button"
-          routerLink="/index/logintype"
-        >
-          <IonLabel className="label"> Skip</IonLabel>
-          <IonIcon src={chevronForward}></IonIcon>
-        </IonButton>
-      </IonHeader>
       <Swiper
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
+        slidesPerView={1}
         pagination={true}
         modules={[Pagination]}
         className="mySwiper"
+        autoplay={{
+          delay: 5000, // Time delay between slides in milliseconds
+          disableOnInteraction: false,
+          stopOnLastSlide: true, // Continue autoplay after user interaction
+        }}
       >
         <SwiperSlide>
           <WelcomeScreen1 nextClick={nextClick} />
