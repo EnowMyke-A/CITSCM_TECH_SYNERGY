@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import './App.css';
-import { Redirect, Route, useLocation } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import "./App.css";
+import { Redirect, Route, useLocation } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -30,20 +30,20 @@ import {
   searchSharp,
 } from 'ionicons/icons';
 /* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
+import "@ionic/react/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
+import "@ionic/react/css/normalize.css";
+import "@ionic/react/css/structure.css";
+import "@ionic/react/css/typography.css";
 
 /* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
+import "@ionic/react/css/padding.css";
+import "@ionic/react/css/float-elements.css";
+import "@ionic/react/css/text-alignment.css";
+import "@ionic/react/css/text-transformation.css";
+import "@ionic/react/css/flex-utils.css";
+import "@ionic/react/css/display.css";
 
 /**
  * Ionic Dark Mode
@@ -56,26 +56,29 @@ import '@ionic/react/css/display.css';
 /* import '@ionic/react/css/palettes/dark.class.css'; */
 
 /* Theme variables */
-import './theme/variables.css';
-import './App.css';
+//import "./theme/variables.css";
+import "./App.css";
 
 // imports for various pages and components
 // creative panel
-import Login from './_creatives/pages/auth/Login';
-import Register from './_creatives/pages/auth/Register';
-import ChatBot from './_creatives/pages/chatbot/ChatBot';
-import Favorites from './_creatives/pages/favorites/Favorites';
-import Home from './_creatives/pages/home/Home';
-import MessageDetails from './_creatives/pages/messages/MessageDetail';
-import MessageList from './_creatives/pages/messages/MessageList';
-import Payment from './_creatives/pages/payments/Payment';
-import SelectPayment from './_creatives/pages/payments/SelectPayment';
-import ProductDetail from './_creatives/pages/products/ProductDetail';
-import EditProfile from './_creatives/pages/profile/EditProfile';
-import UploadProduct from './_creatives/pages/products/UploadProduct';
-import Search from './_creatives/pages/search/Search';
-import Profile from './_creatives/pages/profile/Profile';
-import BottomTabController from './components/buttomTabController';
+import Login from "./_creatives/pages/auth/Login";
+import Register from "./_creatives/pages/auth/Register";
+import ChatBot from "./_creatives/pages/chatbot/ChatBot";
+import Favorites from "./_creatives/pages/favorites/Favorites";
+import Home from "./_creatives/pages/home/Home";
+import MessageDetails from "./_creatives/pages/messages/MessageDetail";
+import MessageList from "./_creatives/pages/messages/MessageList";
+import Payment from "./_creatives/pages/payments/Payment";
+import SelectPayment from "./_creatives/pages/payments/SelectPayment";
+import ProductDetail from "./_creatives/pages/products/ProductDetail";
+import EditProfile from "./_creatives/pages/profile/EditProfile";
+import UploadProduct from "./_creatives/pages/products/UploadProduct";
+import Search from "./_creatives/pages/search/Search";
+import Profile from "./_creatives/pages/profile/Profile";
+import BottomTabController from "./components/buttomTabController";
+import WelcomeScreen from "./intro_on_boarding";
+import RolePage from "./intro_on_boarding/role";
+import { render } from "@testing-library/react";
 // art lover panel
 
 setupIonicReact();
@@ -88,12 +91,15 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
-        <BottomTabController setHideTabBar={setHideTabBar} setShowCreativeTabBar={setShowCreativeTabBar} />
+        <BottomTabController
+          setHideTabBar={setHideTabBar}
+          setShowCreativeTabBar={setShowCreativeTabBar}
+        />
         <IonTabs>
-          <IonRouterOutlet>
+          <IonRouterOutlet animated={true}>
             {/* Creative pages */}
 
-            <Redirect exact path="/" to="/creative/auth/login" />
+            <Redirect exact path="/" to="/welcome" />
 
             <Route path="/creative/auth/login" component={Login} />
             <Route path="/creative/auth/register" component={Register} />
@@ -102,6 +108,8 @@ const App: React.FC = () => {
               render={() => <Home />}
               exact={true}
             />
+            <Route path="/welcome" render={() => <WelcomeScreen />} />
+            <Route path="/select/roles" render={() => <RolePage />} />
             <Route path="/creative/chatbot" component={ChatBot} />
             <Route path="/creative/favorites" component={Favorites} />
             <Route path="/creative/tabs/messages" component={MessageList} />
@@ -121,6 +129,7 @@ const App: React.FC = () => {
 
           {/* Creative Tab bar */}
           {showCreativeTabBar && (
+
             <IonTabBar slot="bottom" className={hideTabBar ? "hide-tab-bar" : "ion-tab-bar"}>
         <IonTabButton tab="Home" href="/creative/tabs/home">
           <IonIcon icon={location.pathname == "creative/tabs/home" ? homeSharp : homeOutline} />
@@ -146,7 +155,10 @@ const App: React.FC = () => {
 
           {/* Art Lover Tab bar */}
           {!showCreativeTabBar && (
-            <IonTabBar slot="bottom" className={hideTabBar ? "hide-tab-bar" : ""}>
+            <IonTabBar
+              slot="bottom"
+              className={hideTabBar ? "hide-tab-bar" : ""}
+            >
               <IonTabButton tab="Home" href="/creatives/tabs/home">
                 <IonIcon icon={homeOutline} />
                 <IonLabel>User Home</IonLabel>
