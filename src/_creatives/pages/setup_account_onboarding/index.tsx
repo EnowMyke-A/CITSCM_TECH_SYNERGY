@@ -6,6 +6,9 @@ import { Pagination, Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 
 import PasswordSignUpScreen from "./welcome_slides/password_email";
+import ContactLocationScreen from "./welcome_slides/contact_location";
+import BioPhotoScreen from "./welcome_slides/bio_photo";
+import ArtistName from "./welcome_slides/artist_name";
 import "./account_setup.css";
 
 const SetUpCreativeAccount: React.FC = () => {
@@ -15,32 +18,37 @@ const SetUpCreativeAccount: React.FC = () => {
     if (swiperRef.current) {
       swiperRef.current.slideNext();
     }
-  }
+    }
+    
+    function prevClick() {
+      if (swiperRef.current) {
+        swiperRef.current.slidePrev();
+      }
+    }
 
   return (
     <div className="main_setup_creative_account">
       <Swiper
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
         slidesPerView={1}
         pagination={true}
+        allowTouchMove={false}
         modules={[Pagination]}
         className="mySwiper"
-        autoplay={{
-          delay: 5000, // Time delay between slides in milliseconds
-          disableOnInteraction: false,
-          stopOnLastSlide: true, // Continue autoplay after user interaction
-        }}
       >
         <SwiperSlide>
-          <PasswordSignUpScreen nextClick={nextClick} />
+          <PasswordSignUpScreen nextClick={nextClick} prevClick={prevClick} />
         </SwiperSlide>
         <SwiperSlide>
-          <PasswordSignUpScreen nextClick={nextClick} />
+          <ContactLocationScreen nextClick={nextClick} prevClick={prevClick} />
         </SwiperSlide>
         <SwiperSlide>
-          <PasswordSignUpScreen nextClick={nextClick} />
+          <BioPhotoScreen nextClick={nextClick} prevClick={prevClick} />
         </SwiperSlide>
         <SwiperSlide>
-          <PasswordSignUpScreen nextClick={nextClick} />
+          <ArtistName prevClick={prevClick} />
         </SwiperSlide>
       </Swiper>
     </div>
