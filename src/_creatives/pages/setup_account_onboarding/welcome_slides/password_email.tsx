@@ -1,5 +1,5 @@
 import "./welcome_slide.css";
-import {signInWithGoogle} from '../../../../services/Auth'
+import { signInWithGoogle } from "../../../../services/Auth";
 
 interface prop {
   nextClick: Function;
@@ -19,7 +19,9 @@ const PasswordSignUpScreen: React.FC<prop> = ({ nextClick, prevClick ,setEmail,s
     //Do some validation here
     prevClick();
   }
-async function googleAuth() {
+
+
+  async function googleAuth() {
     await signInWithGoogle();
   }
 

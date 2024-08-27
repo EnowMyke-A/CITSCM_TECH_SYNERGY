@@ -2,8 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap");
 
-
-@import url('https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap");
 
 :root {
   --ion-color-primary: #000 !important;
@@ -48,10 +47,6 @@ input {
   border: none;
 }
 
-ion-tab-bar {
-  height: 70px !important;
-}
-
 ion-tab-button ion-icon {
   width: 24px;
   height: 24px;
@@ -84,4 +79,37 @@ ion-tab-button.tab-selected ion-label {
 
 .toolbar-background {
   background-color: var(--background) importn !important;
+}
+
+ion-tab-button.tab-selected {
+  --background: #dcdcdc;
+  border-radius: 24px;
+}
+
+ion-tab-bar {
+  padding: 10px;
+}
+
+.sticky-top button {
+  background-color: #c4c4c4;
+}
+
+.sticky-top button.active {
+  background-color: #000 !important;
+}
+
+.sticky-top {
+  border: 1px solid #dcdcdc;
+}
+
+.arts-works .content span {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.arts-works .content {
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

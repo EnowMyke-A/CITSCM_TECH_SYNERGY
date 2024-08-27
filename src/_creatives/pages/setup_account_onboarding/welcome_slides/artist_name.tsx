@@ -1,4 +1,5 @@
 import "./welcome_slide.css";
+import { useIonRouter } from "@ionic/react";
 
 
 interface prop {
@@ -12,6 +13,15 @@ const ArtistName: React.FC<prop> = ({prevClick,setArtistName,handleRegister}) =>
   function handleClickPrev() {
     //Do some validation here
     prevClick();
+  }
+
+  const router = useIonRouter();
+
+  function handleAccountCreation() {  
+
+    //put all code for account creation here
+
+    router.push("/creative/tabs/home");
   }
 
   return (
@@ -47,6 +57,7 @@ const ArtistName: React.FC<prop> = ({prevClick,setArtistName,handleRegister}) =>
           />
         </div>
         <button className="primary-black-button" onClick={()=>{handleRegister()}}>Let's go</button>
+
       </div>
     </div>
   );
