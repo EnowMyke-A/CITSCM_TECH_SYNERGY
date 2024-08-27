@@ -47,7 +47,7 @@ const Home: React.FC = () => {
                     <button>For me</button>
                 </div>
 
-                <ArtsWorks />
+                <ArtsWorks arts={ Arts} />
             </IonContent>
         </IonPage>
     );
