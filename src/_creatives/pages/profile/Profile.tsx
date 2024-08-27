@@ -9,7 +9,7 @@ import {
 import './profile.css';
 import React, { ChangeEvent, useState, useRef } from 'react';
 import ArtsWorks from '../../../components/ArtsWorks';
-import { add } from 'ionicons/icons';
+import { add, analytics, analyticsSharp, barbellSharp, barChart, barChartOutline, settings, statsChart, statsChartSharp } from 'ionicons/icons';
 
 const Profile: React.FC = () => {
   const [image, setImage] = useState(null);
@@ -35,8 +35,12 @@ const Profile: React.FC = () => {
     <IonPage>
       <IonContent className="ion-padding user-profile">
         <div className="user-profile-content">
+          <div className="profile-icons">
+            <IonIcon icon={statsChartSharp} />
+            <IonIcon icon={settings} />
+          </div>
           <div className="img">
-            <img src="" alt="" />
+            <img src="https://media.istockphoto.com/id/1393187216/photo/cool-senior-man-with-fashionable-outfit-portrait.jpg?s=612x612&w=0&k=20&c=mgRYLJnyqOUBR49RNSl-8W5hf8DF3egccYYDgiBQXM4=" alt="" />
           </div>
           <div className="user-details">
             <p className="name">Pa Ndongmo Eta</p>
