@@ -3,10 +3,9 @@ import { IonContent, IonIcon, IonPage, IonProgressBar } from '@ionic/react';
 import './Products.css';
 import BackBtn from '../../../components/BackBtn';
 import {
-  cameraOutline,
   chevronForward,
   cloudUpload,
-  cloudUploadSharp,
+  pencilSharp,
   save,
   sparklesSharp,
 } from 'ionicons/icons';
@@ -115,7 +114,7 @@ const UploadProduct: React.FC = () => {
           <div className="img-absolute-btn">
             <button>
               <label htmlFor="image">
-                <IonIcon size="large" icon={cameraOutline} />
+                <IonIcon size="large" icon={pencilSharp} />
                 <input
                   type="file"
                   name="image"
