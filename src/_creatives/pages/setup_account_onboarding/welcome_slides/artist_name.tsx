@@ -1,10 +1,13 @@
 import "./welcome_slide.css";
 
+
 interface prop {
   prevClick: Function;
+  handleRegister: Function;
+  setArtistName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ArtistName: React.FC<prop> = ({prevClick}) => {
+const ArtistName: React.FC<prop> = ({prevClick,setArtistName,handleRegister}) => {
 
   function handleClickPrev() {
     //Do some validation here
@@ -40,9 +43,10 @@ const ArtistName: React.FC<prop> = ({prevClick}) => {
             id="artist_name"
             name="artist_field"
             placeholder="your name"
+            onChange={(e:any)=>{ setArtistName(e.target.value)}}
           />
         </div>
-        <button className="primary-black-button">Let's go</button>
+        <button className="primary-black-button" onClick={()=>{handleRegister()}}>Let's go</button>
       </div>
     </div>
   );
