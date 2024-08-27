@@ -1,12 +1,15 @@
 import "./welcome_slide.css";
-import {signInWithGoogle} from '../../../../services/Auth'
+import { signInWithGoogle } from "../../../../services/Auth";
 
 interface prop {
   nextClick: Function;
   prevClick: Function;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const PasswordSignUpScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
+const PasswordSignUpScreen: React.FC<prop> = ({ nextClick, prevClick ,setEmail,setPassword}) => {
+
   function handleClickNext() {
     //Do some validation here
     nextClick();
@@ -14,9 +17,11 @@ const PasswordSignUpScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
 
   function handleClickPrev() {
     //Do some validation here
-    prevClick();}
+    prevClick();
+  }
 
-async function googleAuth() {
+
+  async function googleAuth() {
     await signInWithGoogle();
   }
 
@@ -48,6 +53,7 @@ async function googleAuth() {
                 name="email_field"
                 id="email_signup"
                 placeholder="email"
+                onChange={(e)=>{setEmail(e.target.value)}}
               />
               <label htmlFor="password_signup" style={{ marginTop: "15px" }}>
                 Password
@@ -57,6 +63,7 @@ async function googleAuth() {
                 name="password_field"
                 id="password_signup"
                 placeholder="password"
+                onChange={(e)=>{setPassword(e.target.value)}}
               />
               <button onClick={handleClickNext}>Next</button>
             </div>
