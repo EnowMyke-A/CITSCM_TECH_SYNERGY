@@ -21,6 +21,8 @@ const Home: React.FC = () => {
   const [Arts, setArts] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState('arts')
 
+  const [tabButton, setActiveTabButton] = useState("for_you");
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -55,12 +57,14 @@ const Home: React.FC = () => {
         </div>
 
         <div className="sticky-top">
+
           <button className={activeTab === 'arts' ? 'active' : ''} onClick={()=>{
             setActiveTab('arts')
           }}>For you</button>
           <button className={activeTab === 'collections' ? 'active' : ''} onClick={()=>{
             setActiveTab('collections')
           }}>Collections</button>
+
         </div>
 
         { activeTab === 'arts' && <ArtsWorks arts={Arts} />}

@@ -18,30 +18,27 @@ const BioPhotoScreen: React.FC<prop> = ({ nextClick, prevClick,setBio,setProfile
     
     function handleClickPrev() {
       //Do some validation here
-      handleUploadAndPreview()
       prevClick();
   }
 
   const [image,setImage]= useState(null)
   
-    const handleImageChange = (e:any) => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
-  };
-
-  const handleUploadAndPreview = () => {
-    if (image) {
-
-      const storageRef = ref(storage, `profileImages/${new Date().getTime() }`);
-      const uploadTask = uploadBytesResumable(storageRef, image);
+   const handleImageChange = (e:any) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImage(file);
+      console.log("Selected image:", file); 
+      
+        const storageRef = ref(storage, `profileImages/${new Date().getTime()}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
       uploadTask.on(
-        'state_changed',
+        "state_changed",
         (snapshot) => {
+          // Progress handler (optional)
         },
         (error) => {
-          console.error('Upload error:', error);
+          console.error("Upload error:", error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -51,6 +48,8 @@ const BioPhotoScreen: React.FC<prop> = ({ nextClick, prevClick,setBio,setProfile
       );
     }
   };
+
+ 
 
   return (
     <div className="main_signup_container bio_photo">
@@ -69,12 +68,13 @@ const BioPhotoScreen: React.FC<prop> = ({ nextClick, prevClick,setBio,setProfile
             clip-rule="evenodd"
           />
         </svg>
-        <input type="file" onChange={handleImageChange} />
+        
       </button>
       <div className="main_signup_content">
         <div className="logo_section"></div>
         <div className="signup_content_proper">
           <div className="upload_photo_section">
+            <input type="file" onChange={handleImageChange} />
             <span>Upload your profile photo</span>
             <div className="image_container">
               <svg

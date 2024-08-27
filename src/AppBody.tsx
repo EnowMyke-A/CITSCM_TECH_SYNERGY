@@ -47,6 +47,7 @@ import RolePage from "./intro_on_boarding/role";
 import SetUpCreativeAccount from "./_creatives/pages/setup_account_onboarding";
 import { render } from "@testing-library/react";
 
+
 import { useRef, useEffect, useState } from "react";
 
 import homeIcon from "./assets/icons/home.svg";
@@ -54,9 +55,13 @@ import messageIcon from "./assets/icons/message.svg";
 import searchIcon from "./assets/icons/search.svg";
 import profileIcon from "./assets/icons/account_circle.svg";
 
+
+
+
 const AppBody: React.FC = () => {
   const [hideTabBar, setHideTabBar] = useState(false);
   const [showCreativeTabBar, setShowCreativeTabBar] = useState(false);
+  
 
   const currentLocation = useLocation();
 

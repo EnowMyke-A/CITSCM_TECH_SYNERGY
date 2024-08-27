@@ -15,10 +15,26 @@ import {
   save,
   sparklesSharp,
 } from 'ionicons/icons';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+
+const API_KEY = "AIzaSyBXanBrQOiU9qP1DrSnaic967YB2nJRMrs";
+const genAI = new GoogleGenerativeAI(API_KEY);
+
+type ChatPart = {
+  text: string;
+};
+
+type ChatMessage = {
+  role: "user" | "model";
+  parts: ChatPart[];
+};
+
 
 const UploadProduct: React.FC = () => {
   const [image, setImage] = useState(null);
   const [audioFile, setAudioFile] = useState<File | null>(null);
+  const [ans, setAns] = useState('');
 
   const location = useLocation();
        const imageData = location.state?.image; 
@@ -109,6 +125,50 @@ const UploadProduct: React.FC = () => {
   const handlePrevStep = () => {
     if (step > 1) {
       setStep(step - 1);
+    }
+  };
+
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const [question, setQuestion] = useState<string>("");
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+
+
+    const generateAnswer = async () => {
+    const msg = question;
+
+    console.log(question, 'msg', msg)
+    
+    setChatHistory((prevChatHistory) => [
+      ...prevChatHistory,
+      {
+        role: "user",
+        parts: [{ text: question }],
+      },
+    ]);
+
+    try {
+      const chat = model.startChat({
+        history: chatHistory,
+        generationConfig: {
+          maxOutputTokens: 500,
+        },
+      });
+
+      const { response } = await chat.sendMessage(msg);
+      const text = await response.text();
+    
+      setChatHistory((prevChatHistory) => [
+        ...prevChatHistory,
+        {
+          role: "model",
+          parts: [{ text }],
+        },
+      ]);
+      
+      setQuestion(""); 
+       setAns(text);
+    } catch (error) {
+      console.error("Error generating answer:", error);
     }
   };
 
@@ -248,14 +308,16 @@ const UploadProduct: React.FC = () => {
                   <textarea
                     name=""
                     id=""
+                    value={ans}
                     placeholder="Story behind your art?"
+                    onChange={(e)=>{setAns(e.target.value)}}
                   ></textarea>
                 </div>
 
                 <div className="btn-add-edit-text">
                   <button className="btn-enhance-text">
                     <IonIcon icon={sparklesSharp} />
-                    <span>Enhance with AI</span>
+                    <span onClick={()=>{generateAnswer()}}>Enhance with AI</span>
                   </button>
 
                   <button
