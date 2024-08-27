@@ -3,9 +3,11 @@ import "./welcome_slide.css";
 interface prop {
   nextClick: Function;
   prevClick: Function;
+  setTelephone: React.Dispatch<React.SetStateAction<string>>,
+  setLocation:React.Dispatch<React.SetStateAction<string>>
 }
 
-const ContactLocationScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
+const ContactLocationScreen: React.FC<prop> = ({ nextClick, prevClick,setTelephone,setLocation }) => {
   function handleClickNext() {
     //Do some validation here
     nextClick();
@@ -44,6 +46,7 @@ const ContactLocationScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
                 name="phone_field"
                 id="phone_signup"
                 placeholder="e.g +237670899677"
+                onChange={(e:any)=>{setTelephone(e.target.value)}}
               />
               <label htmlFor="location_signup" style={{ marginTop: "15px" }}>
                 Location
@@ -53,6 +56,7 @@ const ContactLocationScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
                 name="location_field"
                 id="location_signup"
                 placeholder="where in cameroon?"
+                onChange={ (e:any)=>{setLocation(e.target.value)}}
               />
               <button
                 onClick={() => {

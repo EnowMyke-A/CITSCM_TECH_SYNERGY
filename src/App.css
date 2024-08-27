@@ -8,10 +8,11 @@
   --ion-color-primary: #000 !important;
   --background: #fff;
   --ion-color-mute: #dcdcdc;
+  --ion-color-skeleton: #f1f1f1;
 }
 
 * {
-  font-family: "Ojuju", sans-serif !important;
+  font-family: 'Ojuju', sans-serif !important;
   box-sizing: border-box;
   margin: 0;
   padding: 0;

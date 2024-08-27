@@ -61,6 +61,8 @@ const Home: React.FC = () => {
           >
             For me
           </button>
+          <button className="active">For you</button>
+          <button>For me</button>
         </div>
 
         <ArtsWorks arts={Arts} />

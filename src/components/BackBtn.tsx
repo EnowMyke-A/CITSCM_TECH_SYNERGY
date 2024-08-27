@@ -1,7 +1,5 @@
 import { IonBackButton, IonButtons, IonHeader, IonToolbar } from '@ionic/react';
 import React from 'react';
-
-
     
 interface BackBtnProps {
     title: string; 
