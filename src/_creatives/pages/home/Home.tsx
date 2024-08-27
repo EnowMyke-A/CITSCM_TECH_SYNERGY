@@ -12,6 +12,7 @@ import ArtsWorks from "../../../components/ArtsWorks";
 import { getAllProducts } from "../../../services/product";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../../config/firebase";
+import ProductSkeleton from "../../../components/skeletons/ProductSkeleton";
 
 const Home: React.FC = () => {
   const [Arts, setArts] = useState<any[]>([]);
@@ -45,7 +46,10 @@ const Home: React.FC = () => {
         <div className="home-section-1">
           <h2>Newest Artworks</h2>
 
-          <ProductList arts={Arts} />
+                  {
+                      Arts ?  <ProductList arts={Arts} /> : <ProductSkeleton/>  
+                  }
+       
         </div>
 
         <div className="sticky-top">
