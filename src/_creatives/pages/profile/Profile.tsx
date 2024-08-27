@@ -5,31 +5,18 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonRouter,
 } from '@ionic/react';
 import './profile.css';
 import React, { ChangeEvent, useState, useRef } from 'react';
-import ArtsWorks from '../../../components/ArtsWorks';
-import { add, analytics, analyticsSharp, barbellSharp, barChart, barChartOutline, settings, statsChart, statsChartSharp } from 'ionicons/icons';
+import { add, settings, statsChartSharp } from 'ionicons/icons';
 
 const Profile: React.FC = () => {
+  const router = useIonRouter()
   const [image, setImage] = useState(null);
 
   const fileInputRef = useRef(null);
 
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
 
   return (
     <IonPage>
@@ -43,12 +30,10 @@ const Profile: React.FC = () => {
             <img src="https://media.istockphoto.com/id/1393187216/photo/cool-senior-man-with-fashionable-outfit-portrait.jpg?s=612x612&w=0&k=20&c=mgRYLJnyqOUBR49RNSl-8W5hf8DF3egccYYDgiBQXM4=" alt="" />
           </div>
           <div className="user-details">
-            <p className="name">Pa Ndongmo Eta</p>
+            <p className="name">Pa. Ndongmo Eta</p>
 
             <p className="desc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
-              odio eos quibusdam optio, veritatis recusandae ab! Eos
-              consequuntur cum deserunt.
+            Painter specializing in surreal landscapes and abstract compositions. My work explores the interplay of light and color, creating dreamlike worlds that invite introspection. I use my arts to capture the ethereal beauty and hidden depths of my imagined landscapes. 
             </p>
 
             <button className="edit-profile-btn">Edit Profile</button>
@@ -62,7 +47,7 @@ const Profile: React.FC = () => {
           </div>
 
           {/* <ArtsWorks /> */}
-            <input
+            {/* <input
               type="file"
               name="artImage"
               id="artImage"
@@ -70,11 +55,13 @@ const Profile: React.FC = () => {
               onChange={handleImageChange}
               ref={fileInputRef}
               style={{display: 'none'}}
-            />
+            /> */}
 
-          <label htmlFor="artImage" className='image-label'>
+          <label className='image-label'>
 
-            <button onClick={handleButtonClick} className="make-post-btn">
+            <button onClick={()=>{
+              router.push('/creative/products/add')
+            }} className="make-post-btn">
               <span>Make a post</span>
               <IonIcon icon={add} />
             </button>
