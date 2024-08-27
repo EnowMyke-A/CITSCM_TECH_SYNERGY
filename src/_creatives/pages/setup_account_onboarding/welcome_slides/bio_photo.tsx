@@ -1,11 +1,16 @@
 import "./welcome_slide.css";
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage } from "../../../../config/firebase"
+import { useState } from "react";
 
 interface prop {
   nextClick: Function;
   prevClick: Function;
+  setBio: React.Dispatch<React.SetStateAction<string>>;
+  setProfilePhoto:React.Dispatch<React.SetStateAction<string>>
 }
 
-const BioPhotoScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
+const BioPhotoScreen: React.FC<prop> = ({ nextClick, prevClick,setBio,setProfilePhoto }) => {
   function handleClickNext() {
     //Do some validation here
     nextClick();
@@ -13,12 +18,44 @@ const BioPhotoScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
     
     function handleClickPrev() {
       //Do some validation here
+      handleUploadAndPreview()
       prevClick();
+  }
+
+  const [image,setImage]= useState(null)
+  
+    const handleImageChange = (e:any) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
     }
+  };
+
+  const handleUploadAndPreview = () => {
+    if (image) {
+
+      const storageRef = ref(storage, `profileImages/${new Date().getTime() }`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+        },
+        (error) => {
+          console.error('Upload error:', error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setProfilePhoto(downloadURL);
+          });
+        }
+      );
+    }
+  };
 
   return (
     <div className="main_signup_container bio_photo">
       <button onClick={handleClickPrev} className="float_back_button_auth">
+        
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="300"
@@ -32,6 +69,7 @@ const BioPhotoScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
             clip-rule="evenodd"
           />
         </svg>
+        <input type="file" onChange={handleImageChange} />
       </button>
       <div className="main_signup_content">
         <div className="logo_section"></div>
@@ -60,6 +98,7 @@ const BioPhotoScreen: React.FC<prop> = ({ nextClick, prevClick }) => {
               name="bio_text_area"
               id="bio_input"
               placeholder="Write soemthing about yourself (e.g skill achievements)"
+              onChange={(e:any)=>{setBio(e.target.value)}}
             ></textarea>
           </div>
           <button

@@ -13,12 +13,13 @@ async function signUp(email: string, password: string, additionalData: any) {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    await setDoc(doc(db, 'users', user.uid), {
+    await setDoc(doc(db, 'Users', user.uid), {
       email: user.email,
       ...additionalData
     });
 
     console.log('User signed up and data stored in Firestore:', user.uid);
+    return user.uid;
   } catch (error) {
     console.error('Error signing up:', error);
   }

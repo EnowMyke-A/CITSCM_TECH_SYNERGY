@@ -42,6 +42,9 @@ import AppBody from "./AppBody";
 setupIonicReact();
 
 const App: React.FC = () => {
+  const [hideTabBar, setHideTabBar] = useState(false);
+  const [showCreativeTabBar, setShowCreativeTabBar] = useState(false);
+
   return (
     <IonApp>
       <IonReactRouter>
