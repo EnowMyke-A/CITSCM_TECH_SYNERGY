@@ -1,10 +1,13 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { IonContent, IonIcon, IonPage, IonProgressBar } from '@ionic/react';
+import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
+import { IonContent, IonIcon, IonLabel, IonPage, IonProgressBar } from '@ionic/react';
 import './Products.css';
 import BackBtn from '../../../components/BackBtn';
 import {
+  chevronBack,
   chevronForward,
+  cloudDownloadOutline,
   cloudUpload,
+  cloudUploadOutline,
   pencilSharp,
   save,
   sparklesSharp,
@@ -30,8 +33,21 @@ const UploadProduct: React.FC = () => {
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [ans, setAns] = useState('');
 
+  const audioInputRef = useRef(null);
+  const videoRef = useRef(null);
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const handleButton1Click = () => {
+    audioInputRef.current.click();
+  };
+  const handleButton2Click = () => {
+    videoRef.current.click();
+  };
+
+  const handleLastStep = () => {
+    setStep(4)
+  }
 
   const [step, setStep] = useState(1);
 
@@ -83,13 +99,6 @@ const UploadProduct: React.FC = () => {
       reader.readAsDataURL(file);
     }
   };
-
-  const steps = [
-    { number: 1, title: 'Write in text' },
-    { number: 2, title: 'Post Audio' },
-    { number: 3, title: 'Upload Video' },
-    { number: 4, title: 'Product Specifications' },
-  ];
 
   const handleNextStep = () => {
     switch (step) {
@@ -188,160 +197,8 @@ const UploadProduct: React.FC = () => {
           </div>
         </div>
 
-        <div className="post-content ion-padding">
-          <div className="title">
-            <label htmlFor="title">Art Title:</label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              placeholder="e.g. Across the savanah"
-            />
-          </div>
-
-          <div className="upload-art-container">
-            <h3>Tell the story behing your art</h3>
-            <div className="tab-btn-container">
-              <button className="active">Write in text</button>
-              <button>Post Audio</button>
-              <button>Upload Video</button>
-            </div>
-
-            <div className="progress-bar-container">
-              {steps.map((s) => (
-                <div
-                  key={s.number}
-                  className={`progress-step ${
-                    s.number === step || s.number < step ? 'active' : ''
-                  }`}
-                >
-                  <div className="step-number">
-                    <p>{s.number}</p>
-                  </div>
-                  <div className="step-title">{s.title}</div>
-                </div>
-              ))}
-              <IonProgressBar
-                value={(step - 1) / 3}
-                className="progress-bar"
-              ></IonProgressBar>
-            </div>
-
-            {step === 1 && (
-              <div className="text-tab">
-                <div className="input-container">
-                  <textarea
-                    name=""
-                    id=""
-                    value={ans}
-                    placeholder="Story behind your art?"
-                    onChange={(e)=>{setAns(e.target.value)}}
-                  ></textarea>
-                </div>
-
-                <div className="btn-add-edit-text">
-                  <button className="btn-enhance-text">
-                    <IonIcon icon={sparklesSharp} />
-                    <span onClick={()=>{generateAnswer()}}>Enhance with AI</span>
-                  </button>
-                  <button className="btn-save-text" onClick={
-                    handleNextStep
-                  }>
-                    <span>Next</span>
-                    <IonIcon icon={chevronForward} />
-                  </button>
-                </div>
-              </div>
-            )}
-            {step === 2 && (
-              <div className="audio-tab">
-                <div>
-                  <input
-                    type="file"
-                    id="audio-input"
-                    accept="audio/*"
-                    onChange={handleAudioFileChange}
-                    required
-                  />
-
-                  <div className="preview-container">
-                    {audioFile && (
-                      <audio id="audio-preview" controls>
-                        <source
-                          src={URL.createObjectURL(audioFile)}
-                          type={audioFile.type}
-                        />
-                        Your browser does not support the audio element.
-                      </audio>
-                    )}
-                  </div>
-
-                  <button
-                    className="btn-save-text"
-                    onClick={() => {
-                      handleFormSubmit;
-                    }}
-                  >
-                    <IonIcon icon={save} />
-                    <span>Save and Continue</span>
-                  </button>
-
-                  <style>
-                    {`
-          .preview-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-          }
-
-          audio {
-            width: 100%;
-            max-width: 500px;
-            margin-top: 10px;
-          }
-        `}
-                  </style>
-                </div>
-              </div>
-            )}
-            {step === 3 && (
-              <div className="video-tab">
-                <div className="video-display">
-                  {/* video display */}
-                  {videoSrc ? (
-                    <div className="preview-container">
-                      <video
-                        src={videoSrc}
-                        controls
-                        width="100%"
-                        style={{
-                          maxWidth: '600px',
-                          marginTop: '20px',
-                          borderRadius: '4px',
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <div className="video-preview"></div>
-                  )}
-                  <br />
-                  <input
-                    type="file"
-                    accept=".mp4"
-                    style={{ margin: '0 auto', width: '90%' }}
-                    onChange={handleFileChange}
-                  />
-                  {error && <p style={{ color: 'red' }}>{error}</p>}
-                </div>
-                <button className="btn-save-text">
-                  <IonIcon icon={save} />
-                  <span>Save and Continue</span>
-                </button>
-              </div>
-            )}
-            {step === 4 && (
-              <div className="product-specifications">
+{step === 4 ?
+              <div className="ion-padding product-specifications">
                 <div className="input">
                   <label htmlFor="material">Material Used</label>
                   <input
@@ -392,10 +249,225 @@ const UploadProduct: React.FC = () => {
                   <IonIcon icon={cloudUpload} />
                   <span>Upload Product</span>
                 </button>
+
+                <button className='btn-prev' onClick={handlePrevStep}><IonIcon icon={chevronBack} /> <span>Back</span></button>
+              </div>
+            :
+    <div className="post-content ion-padding">
+          <div className="title">
+            <label htmlFor="title">Art Title:</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="e.g. Across the savanah"
+            />
+          </div>
+
+          <div className="upload-art-container">
+            <h3>Tell the story behind your art</h3>
+
+            {step <= 3 && (
+              <div className="tab-btn-container">
+                <button
+                  className={step === 1 && 'active'}
+                  onClick={() => {
+                    setStep(1);
+                  }}
+                >
+                  Write in text
+                </button>
+                <button
+                  className={step === 2 && 'active'}
+                  onClick={() => {
+                    setStep(2);
+                  }}
+                >
+                  Post Audio
+                </button>
+                <button
+                  className={step === 3 && 'active'}
+                  onClick={() => {
+                    setStep(3);
+                  }}
+                >
+                  Upload Video
+                </button>
+              </div>
+            )}
+
+            {step === 1 && (
+              <div className="text-tab">
+                <div className="input-container">
+                  <textarea
+                    name=""
+                    id=""
+                    value={ans}
+                    placeholder="Story behind your art?"
+                    onChange={(e)=>{setAns(e.target.value)}}
+                  ></textarea>
+                </div>
+
+                <div className="btn-add-edit-text">
+                  <button className="btn-enhance-text">
+                    <IonIcon icon={sparklesSharp} />
+                    <span onClick={()=>{generateAnswer()}}>Enhance with AI</span>
+                  </button>
+
+                  <button
+                    className="btn-save-text"
+                    onClick={() => {
+                      handleFormSubmit;
+                      handleLastStep
+                    }}
+                  >
+                    <IonIcon icon={save} />
+                    <span>Save and Continue</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div className="audio-tab">
+                <p>
+                  <i>
+                    <center>
+                      Upload a recorded audio of you telling the passionate
+                      story behind your art and then decide whether to translate
+                      to English with Ai
+                    </center>
+                  </i>
+                </p>
+                <div>
+                  <input
+                    type="file"
+                    id="audio-input"
+                    name="audio-input"
+                    accept="audio/*"
+                    onChange={handleAudioFileChange}
+                    style={{ display: 'none' }}
+                    ref={audioInputRef}
+                  />
+
+                  <label htmlFor="audio-input">
+                    <button
+                      onClick={handleButton1Click}
+                      className="upload-items-class"
+                    >
+                      <IonIcon icon={cloudUploadOutline} />
+                      Browse for audio
+                    </button>
+                  </label>
+
+                  <div className="preview-container">
+                    {audioFile && (
+                      <audio id="audio-preview" controls>
+                        <source
+                          src={URL.createObjectURL(audioFile)}
+                          type={audioFile.type}
+                        />
+                        Your browser does not support the audio element.
+                      </audio>
+                    )}
+                  </div>
+                  <button className="btn-enhance-text">
+                    <IonIcon icon={sparklesSharp} />
+                    <span>Transcribe with AI</span>
+                  </button>
+
+                  <button
+                    className="btn-save-text"
+                    onClick={() => {
+                      handleFormSubmit;
+                      handleLastStep
+                    }}
+                  >
+                    <IonIcon icon={save} />
+                    <span>Save and Continue</span>
+                  </button>
+
+                  <style>
+                    {`
+          .preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+          }
+
+          audio {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 10px;
+          }
+        `}
+                  </style>
+                </div>
+              </div>
+            )}
+
+            {step === 3 && (
+              <div className="video-tab">
+                <p>
+                  <i>
+                    <center>
+                      Upload a recorded audio of you telling the passionate
+                      story behind your art
+                    </center>
+                  </i>
+                </p>
+
+                <div className="video-display">
+                  {/* video display */}
+                  {videoSrc ? (
+                    <div className="preview-container">
+                      <video
+                        src={videoSrc}
+                        controls
+                        width="100%"
+                        style={{
+                          maxWidth: '600px',
+                          marginTop: '20px',
+                          borderRadius: '4px',
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="video-preview"></div>
+                  )}
+                  <br />
+                  <input
+                    id="video-input"
+                    type="file"
+                    accept=".mp4"
+                    style={{ display: 'none', margin: '0 auto', width: '90%' }}
+                    onChange={handleFileChange}
+                    ref={videoRef}
+                  />
+
+                  <label htmlFor="video-input">
+                    <button
+                      onClick={handleButton2Click}
+                      className="upload-items-class"
+                    >
+                      <IonIcon icon={cloudUploadOutline} />
+                      Browse for video
+                    </button>
+                  </label>
+
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                </div>
+                <button className="btn-save-text" onClick={handleLastStep}>
+                  <IonIcon icon={save} />
+                  <span>Save and Continue</span>
+                </button>
               </div>
             )}
           </div>
         </div>
+}
+    
       </IonContent>
     </IonPage>
   );
