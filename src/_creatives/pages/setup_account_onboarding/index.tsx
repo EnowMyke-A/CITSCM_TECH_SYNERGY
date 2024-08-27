@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
-
+import { useIonRouter } from "@ionic/react";
 import PasswordSignUpScreen from "./welcome_slides/password_email";
 import ContactLocationScreen from "./welcome_slides/contact_location";
 import BioPhotoScreen from "./welcome_slides/bio_photo";
@@ -22,7 +22,11 @@ const SetUpCreativeAccount: React.FC = () => {
   const [bio, setBio] = useState('');
   const [artist_name, setArtistName] = useState('');
 
+    const router = useIonRouter();
+
   function nextClick() {
+   
+
     if (swiperRef.current) {
       swiperRef.current.slideNext();
     }
@@ -34,12 +38,15 @@ const SetUpCreativeAccount: React.FC = () => {
       }
   }
   
- async function handleRegister() {
+  async function handleRegister() {
+  
     const post = {
       location,telephone,profile_photo,bio,artist_name
     }
     try {
-     const userId = await signUp(email,password,post)
+      const userId = await signUp(email, password, post)
+      
+    router.push(`/creative/tabs/home/`);
     } catch (error) {
       console.error(error);
     }
