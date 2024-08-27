@@ -15,6 +15,7 @@ import { getAllProducts } from "../../../services/product";
 import Collections from "./components/Collections";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../../config/firebase";
+import ProductSkeleton from "../../../components/skeletons/ProductSkeleton";
 import { menu } from "ionicons/icons";
 
 const Home: React.FC = () => {
@@ -53,7 +54,10 @@ const Home: React.FC = () => {
         <div className="home-section-1">
           <h2>Newest Artworks</h2>
 
-          <ProductList arts={Arts} />
+                  {
+                      Arts ?  <ProductList arts={Arts} /> : <ProductSkeleton/>  
+                  }
+       
         </div>
 
         <div className="sticky-top">
