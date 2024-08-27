@@ -16,6 +16,8 @@ import { db } from "../../../config/firebase";
 const Home: React.FC = () => {
   const [Arts, setArts] = useState<any[]>([]);
 
+  const [tabButton, setActiveTabButton] = useState("for_you");
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -47,6 +49,18 @@ const Home: React.FC = () => {
         </div>
 
         <div className="sticky-top">
+          <button
+            className={tabButton == "for_you" ? "active" : ""}
+            onClick={() => setActiveTabButton("for_you")}
+          >
+            For you
+          </button>
+          <button
+            className={tabButton == "for_me" ? "active" : ""}
+            onClick={() => setActiveTabButton("for_me")}
+          >
+            For me
+          </button>
           <button className="active">For you</button>
           <button>For me</button>
         </div>
