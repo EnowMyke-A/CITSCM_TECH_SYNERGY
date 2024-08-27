@@ -1,12 +1,13 @@
-import { collection, onSnapshot, addDoc, getDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, onSnapshot, addDoc, getDoc, updateDoc, deleteDoc, doc , query,where } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 // Get all the Products
-async function getAllComment() {
-    const colRef = collection(db, 'Products');
-    const list: any[] = [];
+async function getAllComment(productId: string) {
+    const colRef = collection(db, 'Comments');
 
-    const unsubscribe = onSnapshot(colRef, (snapshot) => {
+    const q = query(colRef, where("productid", "==", productId));
+    const list: any[] = [];
+    const unsubscribe = onSnapshot(q, (snapshot) => {
         snapshot.forEach((doc) => {
             list.push({ id: doc.id, ...doc.data() });
         });
@@ -17,60 +18,43 @@ async function getAllComment() {
 
 // Add a new product
 async function addComment(product: any) {
-    const colRef = collection(db, 'Products');
+    const colRef = collection(db, 'Comments');
 
     try {
         const docRef = await addDoc(colRef, product);
         console.log(docRef.id);
         return { id: docRef.id, ...product };
     } catch (error) {
-        console.error("Error adding product:", error);
+        console.error("Error adding comment:", error);
         return null;
     }
 }
 
 // Update an existing product by ID
 async function updateComment(data: any, id: string) {
-    const docRef = doc(db, 'Products', id);
+    const docRef = doc(db, 'Comments', id);
 
     try {
         await updateDoc(docRef, data);
-        return 'Success updating product';
+        return 'Success updating comment';
     } catch (error) {
-        console.error("Error updating product:", error);
-        return 'Failed to update product';
+        console.error("Error updating comment:", error);
+        return 'Failed to update comment';
     }
 }
 
 // Delete a product by ID
 async function deleteComment(id: string) {
-    const docRef = doc(db, 'Products', id);
+    const docRef = doc(db, '', id);
 
     try {
         await deleteDoc(docRef);
-        return 'Success deleting the product';
+        return 'Success deleting the comments';
     } catch (error) {
-        console.error("Error deleting product:", error);
-        return 'Failed to delete product';
+        console.error("Error deleting comment:", error);
+        return 'Failed to delete comment';
     }
 }
 
-// Get a single product by ID
-async function getCommentById(id: string) {
-    const docRef = doc(db, 'Products', id);
 
-    try {
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            return { id: docSnap.id, ...docSnap.data() };
-        } else {
-            console.log("No such document!");
-            return null;
-        }
-    } catch (error) {
-        console.error("Error getting product:", error);
-        return null;
-    }
-}
-
-export { getAllComment, addComment, updateComment, deleteComment, getCommentById };
+export { getAllComment, addComment, updateComment, deleteComment };

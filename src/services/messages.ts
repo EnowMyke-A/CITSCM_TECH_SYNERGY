@@ -1,76 +1,73 @@
-import { collection, onSnapshot, addDoc, getDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, onSnapshot, addDoc, getDoc, updateDoc, deleteDoc, doc,where,query } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 // Get all the Products
-async function getAllMessage() {
-    const colRef = collection(db, 'Products');
+async function getAllMessage(receiverId: string, senderId: string) {
+    const colRef = collection(db, 'Messages');
+
+    const q = query(colRef, 
+        where("receiverId", "in", [receiverId, senderId]),
+        where("senderId", "in", [receiverId, senderId])
+    );
+
     const list: any[] = [];
 
-    const unsubscribe = onSnapshot(colRef, (snapshot) => {
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
         snapshot.forEach((doc) => {
-            list.push({ id: doc.id, ...doc.data() });
+            const data = doc.data();
+           
+            if (
+                (data.receiverId === receiverId && data.senderId === senderId) ||
+                (data.receiverId === senderId && data.senderId === receiverId)
+            ) {
+                list.push({ id: doc.id, ...data });
+            }
         });
     });
 
     return list;
 }
-
 // Add a new product
 async function addMessage(product: any) {
-    const colRef = collection(db, 'Products');
+    const colRef = collection(db, 'Messages');
 
     try {
         const docRef = await addDoc(colRef, product);
         console.log(docRef.id);
         return { id: docRef.id, ...product };
     } catch (error) {
-        console.error("Error adding product:", error);
+        console.error("Error adding messages:", error);
         return null;
     }
 }
 
 // Update an existing product by ID
 async function updateMessage(data: any, id: string) {
-    const docRef = doc(db, 'Products', id);
+    const docRef = doc(db, 'Messages', id);
 
     try {
         await updateDoc(docRef, data);
-        return 'Success updating product';
+        return 'Success updating messages';
     } catch (error) {
-        console.error("Error updating product:", error);
+        console.error("Error updating messages:", error);
         return 'Failed to update product';
     }
 }
 
 // Delete a product by ID
 async function deleteMessage(id: string) {
-    const docRef = doc(db, 'Products', id);
+    const docRef = doc(db, 'Messages', id);
 
     try {
         await deleteDoc(docRef);
-        return 'Success deleting the product';
+        return 'Success deleting the Messages';
     } catch (error) {
-        console.error("Error deleting product:", error);
-        return 'Failed to delete product';
+        console.error("Error deleting Messages:", error);
+        return 'Failed to delete Messages';
     }
 }
 
-// Get a single product by ID
-async function getMessageById(id: string) {
-    const docRef = doc(db, 'Products', id);
 
-    try {
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            return { id: docSnap.id, ...docSnap.data() };
-        } else {
-            console.log("No such document!");
-            return null;
-        }
-    } catch (error) {
-        console.error("Error getting product:", error);
-        return null;
-    }
-}
 
-export { getAllMessage, addMessage, updateMessage, deleteMessage, getMessageById };
+export { getAllMessage, addMessage, updateMessage, deleteMessage };
