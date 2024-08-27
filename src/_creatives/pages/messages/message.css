@@ -45,6 +45,11 @@
   font-size: 1.2rem;
 }
 
+/* message details page */
+.message-details * {
+  font-family: 'Inter', sans-serif !important;
+}
+
 .message-footer {
   padding: 1rem;
   display: flex;
@@ -65,4 +70,32 @@
 
 .message-details > * {
   font-family: 'Inter', sans-serif !important;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
+.message.left {
+  background-color: #f2f2f2;
+  align-self: flex-start;
+}
+
+.message.right {
+  background-color: #e0f2f7;
+  align-self: flex-end;
+}
+
+.timestamp {
+  font-size: 0.8em;
+  color: #888;
+  margin-left: 10px;
 }

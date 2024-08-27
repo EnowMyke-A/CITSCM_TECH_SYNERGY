@@ -1,8 +1,11 @@
 import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { IonContent, IonIcon, IonLabel, IonPage, IonProgressBar } from '@ionic/react';
 import './Products.css';
 import BackBtn from '../../../components/BackBtn';
 import {
+  camera,
+  cameraOutline,
   chevronBack,
   chevronForward,
   cloudDownloadOutline,
@@ -32,6 +35,9 @@ const UploadProduct: React.FC = () => {
   const [image, setImage] = useState(null);
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [ans, setAns] = useState('');
+
+  const location = useLocation();
+       const imageData = location.state?.image; 
 
   const audioInputRef = useRef(null);
   const videoRef = useRef(null);
@@ -183,7 +189,7 @@ const UploadProduct: React.FC = () => {
           <div className="img-absolute-btn">
             <button>
               <label htmlFor="image">
-                <IonIcon size="large" icon={pencilSharp} />
+                <IonIcon size="large" icon={cameraOutline} />
                 <input
                   type="file"
                   name="image"

@@ -1,15 +1,15 @@
-.logo {
-  background-color: #f1f1f1;
-  border-radius: 1rem;
-  width: 100px;
-}
-
 .ellipses {
   width: 140px;
   max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.home-top-section {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .home-top-section p,
@@ -19,6 +19,11 @@
 .home-section-1 h3,
 .home-section-1 span {
   font-family: 'Inter', sans-serif !important;
+}
+
+.home-top-section img {
+  width: 40px;
+  height: 40px;
 }
 
 .home-section-1 {
@@ -110,7 +115,7 @@
   padding: 12px;
   gap: 8px;
   background: #f1f1f1;
-  width: 201px;
+  width: 230px;
 }
 
 .sticky-top button {
@@ -119,6 +124,7 @@
   padding: 14px 16px;
   border-radius: 40px;
   color: #040404;
+  background-color: transparent;
 }
 
 .sticky-top button.active {
@@ -229,4 +235,11 @@
   margin: 0 auto;
   margin-top: 6px;
   background-color: var(--ion-color-skeleton);
+}
+
+.collections * {
+  font-family: 'Inter', sans-serif !important;
+}
+.collections h2 {
+  font-family: 'Ojuju', sans-serif !important;
 }
