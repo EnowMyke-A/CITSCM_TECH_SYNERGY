@@ -1,0 +1,68 @@
+.message-list-page * {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.message-list-page h1 {
+  font-family: 'Ojuju', sans-serif !important;
+}
+
+.message-lists .message-list-items {
+  display: grid;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #f9f9f9;
+  grid-template-columns: 100px 1fr;
+  cursor: pointer;
+}
+
+.message-lists .message-list-items .img {
+  width: 85px;
+  height: 85px;
+  border-radius: 100%;
+  background-color: #f7f7f7;
+}
+.message-lists .message-list-items .img img {
+  width: 85px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 100%;
+  background-color: #f7f7f7;
+}
+
+.message-lists .message-list-items .content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.message-lists .message-list-items .content .name-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.message-lists .message-list-items .content .name {
+  font-size: 1.2rem;
+}
+
+.message-footer {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.message-footer input {
+  padding: 10px 16px;
+  border-radius: 22px;
+  border: 1px solid var(--ion-color-mute);
+  width: 100%;
+}
+
+.message-footer ion-icon {
+  font-size: 1.8rem;
+}
+
+.message-details > * {
+  font-family: 'Inter', sans-serif !important;
+}
