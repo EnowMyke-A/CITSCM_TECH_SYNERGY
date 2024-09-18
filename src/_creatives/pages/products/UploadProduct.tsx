@@ -1,8 +1,11 @@
 import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { IonContent, IonIcon, IonLabel, IonPage, IonProgressBar } from '@ionic/react';
 import './Products.css';
 import BackBtn from '../../../components/BackBtn';
 import {
+  camera,
+  cameraOutline,
   chevronBack,
   chevronForward,
   cloudDownloadOutline,
@@ -12,10 +15,29 @@ import {
   save,
   sparklesSharp,
 } from 'ionicons/icons';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+
+const API_KEY = "AIzaSyBXanBrQOiU9qP1DrSnaic967YB2nJRMrs";
+const genAI = new GoogleGenerativeAI(API_KEY);
+
+type ChatPart = {
+  text: string;
+};
+
+type ChatMessage = {
+  role: "user" | "model";
+  parts: ChatPart[];
+};
+
 
 const UploadProduct: React.FC = () => {
   const [image, setImage] = useState(null);
   const [audioFile, setAudioFile] = useState<File | null>(null);
+  const [ans, setAns] = useState('');
+
+  const location = useLocation();
+       const imageData = location.state?.image; 
 
   const audioInputRef = useRef(null);
   const videoRef = useRef(null);
@@ -106,6 +128,50 @@ const UploadProduct: React.FC = () => {
     }
   };
 
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const [question, setQuestion] = useState<string>("");
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+
+
+    const generateAnswer = async () => {
+    const msg = question;
+
+    console.log(question, 'msg', msg)
+    
+    setChatHistory((prevChatHistory) => [
+      ...prevChatHistory,
+      {
+        role: "user",
+        parts: [{ text: question }],
+      },
+    ]);
+
+    try {
+      const chat = model.startChat({
+        history: chatHistory,
+        generationConfig: {
+          maxOutputTokens: 500,
+        },
+      });
+
+      const { response } = await chat.sendMessage(msg);
+      const text = await response.text();
+    
+      setChatHistory((prevChatHistory) => [
+        ...prevChatHistory,
+        {
+          role: "model",
+          parts: [{ text }],
+        },
+      ]);
+      
+      setQuestion(""); 
+       setAns(text);
+    } catch (error) {
+      console.error("Error generating answer:", error);
+    }
+  };
+
   return (
     <IonPage>
       <BackBtn title="Post Your Artwork" />
@@ -123,7 +189,7 @@ const UploadProduct: React.FC = () => {
           <div className="img-absolute-btn">
             <button>
               <label htmlFor="image">
-                <IonIcon size="large" icon={pencilSharp} />
+                <IonIcon size="large" icon={cameraOutline} />
                 <input
                   type="file"
                   name="image"
@@ -242,14 +308,16 @@ const UploadProduct: React.FC = () => {
                   <textarea
                     name=""
                     id=""
+                    value={ans}
                     placeholder="Story behind your art?"
+                    onChange={(e)=>{setAns(e.target.value)}}
                   ></textarea>
                 </div>
 
                 <div className="btn-add-edit-text">
                   <button className="btn-enhance-text">
                     <IonIcon icon={sparklesSharp} />
-                    <span>Enhance with AI</span>
+                    <span onClick={()=>{generateAnswer()}}>Enhance with AI</span>
                   </button>
 
                   <button
